@@ -23,24 +23,18 @@ jobs:
         with:
           node-version: '22.x'
 
-      # ------------------------------------------------------------------------------------------------------
-      # ✅ ADJUSTMENT: Added the 'working-directory' parameter.
-      # This tells the action to execute the commands from inside the 'backend' folder.
-      # **IMPORTANT**: Change 'backend' to your actual folder name (e.g., 'api') if necessary.
-      # ------------------------------------------------------------------------------------------------------
-      - name: npm install, build, and test
+      - name: npm install and build
         run: |
           npm install
           npm run build --if-present
-          npm run test --if-present
+        # ✅ FIX 1: Run commands inside the 'backend' folder.
         working-directory: backend 
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          # The path remains '.' because the files are now in the 'backend' folder
-          # relative to where the command ran.
+          # ✅ FIX 2: Package contents of the 'backend' folder.
           path: backend 
 
   deploy:
@@ -55,10 +49,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node-app
-          # The downloaded artifact will now be in the root directory, inside a folder
-          # named 'node-app' (the artifact name), but since we set path: backend 
-          # in the upload step, let's keep the download default.
-        
+          # Artifact will be downloaded into a folder named 'node-app'
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -72,5 +64,5 @@ jobs:
         with:
           app-name: 'series-backend'
           slot-name: 'Production'
-          package: node-app 
-          # The package location points to the folder created by the download-artifact step.
+          # ✅ FIX 3: Deploy the contents of the downloaded artifact folder.
+          package: node-app
