@@ -1,0 +1,64 @@
+.app-header {
+    background-color: #d41919;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 110px;
+    border-bottom: double 4px #ffffff;
+    margin-top: 0px;
+    top: 0;
+}
+
+.headerlist {
+    list-style: none;
+}
+
+.imgsec {
+    display: flex;
+    align-items: center;
+    width: 350px;
+    height: 100px;
+}
+
+.home-logo {
+    width: auto;
+    height: 170px;
+
+    border: none;
+}
+
+.buttonssection {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    height: 100px;
+}
+
+.fixed-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.header-button {
+    background-color: #810000;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 1px 2px;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 5px;
+    height: auto;
+}
+
+.header-button:hover {
+    background-color: #ffa7a7;
+    color: #000000c7;
+}
