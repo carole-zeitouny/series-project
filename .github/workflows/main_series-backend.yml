@@ -44,6 +44,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node-app
+          # 💡 FIX 1: Download package contents directly into a predictable folder named 'deploy'
+          path: deploy
           
       - name: Login to Azure
         uses: azure/login@v2
@@ -58,5 +60,5 @@ jobs:
         with:
           app-name: 'series-backend'
           slot-name: 'Production'
-          # This should now correctly point to the application code inside the downloaded artifact folder
-          package: node-app/backend
+          # 💡 FIX 2: Point the deploy action to the 'deploy' folder created above
+          package: deploy
